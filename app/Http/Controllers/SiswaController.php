@@ -51,7 +51,8 @@ class SiswaController extends Controller
         $siswa->nohp = $validateData['nohp'];
         $siswa->save();
 
-        return redirect('/datasiswa');
+        $request->session()->flash('pesan', "Data {$validateData['nama_siswa']} berhasil ditambahkan");
+        return redirect()->route('siswa.data');
     }
 
     public function hapus($id)
@@ -59,6 +60,30 @@ class SiswaController extends Controller
         DB::table('siswas')->where('id', $id)->delete();
 
         // alihkan halaman ke halaman pegawai
-        return redirect('/datasiswa');
+        session()->flash('hapus', "Data berhasil dihapus");
+        return redirect()->route('siswa.data');
+    }
+
+    public function edit(Siswa $siswa)
+    {
+        // dd($siswa);
+        return view('siswa.formeditsiswa', ['siswa' => $siswa]);
+    }
+
+    public function prosesEdit(Request $request, Siswa $siswa)
+    {
+        $validateData = $request->validate([
+            'nis' => 'required|size:10',
+            'nama_siswa' => 'required|min:3|max:60',
+            'alamat' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jurusan' => 'required',
+            'nohp' => 'required'
+        ]);
+        Siswa::where('id', $siswa->id)->update($validateData);
+
+        $request->session()->flash('pesan', "Data {$validateData['nama_siswa']} berhasil diubah");
+        return redirect()->route('siswa.data');
     }
 }

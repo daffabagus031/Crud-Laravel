@@ -39,6 +39,7 @@
             <label for="nohp">Nomor HP : {{ $siswa->nohp }}</label>
         </div>
         <a href="/datasiswa" class="btn btn-primary">Data Siswa</a>
+        <a class="btn btn-warning" href="{{ url("siswa/$siswa->id/edit") }}">Edit</a>
     </div>
 
     <!-- Optional JavaScript -->

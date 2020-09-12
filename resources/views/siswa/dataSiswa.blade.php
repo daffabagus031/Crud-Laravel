@@ -22,7 +22,28 @@
                 <a href="/siswa/simpan" class="btn btn-success float-right">Tambah Data</a>
             </div>
         </div>
-
+        @if(session()->has('pesan'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session()->get('pesan') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @elseif(session()->has('hapus'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session()->get('hapus') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @elseif(session()->has('update'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session()->get('update') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
 
         <table class="table table-hover">
             <thead>
@@ -50,8 +71,8 @@
                     <td>{{ $s->jurusan }}</td>
                     <td>{{ $s->nohp }}</td>
                     <td>
-                        <a href="/siswa/hapus/{{ $s->id }}">Hapus</a>
-                        <a href="siswa/{{ $s->id }}">Detail</a>
+                        <a href="/siswa/hapus/{{ $s->id }}" class="btn btn-danger">Hapus</a>
+                        <a href="siswa/{{ $s->id }}" class="btn btn-primary">Detail</a>
                     </td>
                 </tr>
                 @empty

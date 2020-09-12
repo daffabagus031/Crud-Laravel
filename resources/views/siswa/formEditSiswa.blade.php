@@ -14,50 +14,52 @@
 
 <body>
     <div class="container pt-4 pb-4">
-        <h1 class="text-center">Form Data Siswa</h1>
+        <h1 class="text-center">Form Edit Data Siswa</h1>
         <h2 class="text-center"> SMK Taruna Bhakti</h2>
         <hr>
-        <form action="{{ route('siswa.prosesSimpan') }}" method="POST">
+        <form action="{{ route('siswa.proses',['siswa'=>$siswa->id]) }}" method="POST">
+            @method('PATCH')
             @csrf
             <div class="form-group">
                 <label for="nis">NIS</label>
 
-                <input type="text" name="nis" id="nis" class="form-control @error('nis') is-invalid @enderror" value="{{ old('nis') }}">
+                <input type="text" name="nis" id="nis" class="form-control @error('nis') is-invalid @enderror" value="{{ $siswa->nis }}">
             </div>
             <div class="form-group">
                 <label for="nama_siswa">Nama Siswa</label>
                 @error('nama_siswa')
                 <div class="alert alert-danger">{{ $message}}</div>
                 @enderror
-                <input type="text" name="nama_siswa" id="nama_siswa" class="form-control @error('nama_siswa') is-invalid @enderror" value="{{ old('nama_siswa') }}">
+                <input type="text" name="nama_siswa" id="nama_siswa" class="form-control @error('nama_siswa') is-invalid @enderror" value="{{ $siswa->nama_siswa }}">
             </div>
             <div class="form-group">
                 <label for="alamat">Alamat</label>
                 @error('alamat')
                 <div class="alert alert-danger">{{ $message}}</div>
                 @enderror
-                <textarea name="alamat" id="alamat" cols="30" rows="10" class="form-control @error('alamat') is-invalid @enderror">{{ old('alamat') }}</textarea>
+                <textarea name="alamat" id="alamat" cols="30" rows="10" class="form-control @error('alamat') is-invalid @enderror">{{ $siswa->alamat }}</textarea>
             </div>
             <div class="form-group">
                 <label for="tempat_lahir">Tempat Lahir</label>
                 @error('tempat_lahir')
                 <div class="alert alert-danger">{{ $message}}</div>
                 @enderror
-                <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control @error('tempat_lahir') is-invalid @enderror" value="{{ old('tempat_lahir') }}">
+                <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control @error('tempat_lahir') is-invalid @enderror" value="{{ $siswa->tempat_lahir }}">
             </div>
             <div class="form-group">
                 <label for="tanggal_lahir">Tanggal Lahir</label>
                 @error('tanggal_lahir')
                 <div class="alert alert-danger">{{ $message}}</div>
                 @enderror
-                <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{ old('tanggal_lahir') }}">
+                <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{ $siswa->tanggal_lahir }}">
             </div>
             <div class="form-group">
                 <label for="jurusan">Jurusan</label>
                 @error('jurusan')
                 <div class="alert alert-danger">{{ $message}}</div>
                 @enderror
-                <select name="jurusan" id="jurusan" class="form-control @error('jurusan') is-invalid @enderror" value="{{ old('jurusan') }}">
+                <select name="jurusan" id="jurusan" class="form-control @error('jurusan') is-invalid @enderror">
+                    <option selected="selected" value="{{ $siswa->jurusan }}">{{ $siswa->jurusan }}</option>
                     <option value="RPL">Rekayasa Perangkat Lunak</option>
                     <option value="TKJ">Teknik Komputer dan Jaringan</option>
                     <option value="MM">Multimedia</option>
@@ -70,9 +72,9 @@
                 @error('nohp')
                 <div class="alert alert-danger">{{ $message}}</div>
                 @enderror
-                <input type="number" name="nohp" id="nohp" class="form-control @error('nohp') is-invalid @enderror" value="{{ old('nohp') }}">
+                <input type="number" name="nohp" id="nohp" class="form-control @error('nohp') is-invalid @enderror" value="{{ $siswa->nohp }}">
             </div>
-            <button name="daftar" id="daftar" class="btn btn-success" type="submit">Daftar</button>
+            <button name="daftar" id="daftar" class="btn btn-success" type="submit">Update</button>
             <a href="/datasiswa" class="btn btn-primary">Lihat Data Siswa</a>
         </form>
     </div>

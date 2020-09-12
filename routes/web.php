@@ -21,6 +21,11 @@ Route::get('/siswa', 'SiswaController@index')->name('siswa.index');
 Route::get('/siswa/simpan', 'SiswaController@simpan')->name('siswa.simpan');
 Route::post('/siswa', 'SiswaController@prosesSimpan')->name('siswa.prosesSimpan');
 
-Route::get('/datasiswa', 'SiswaController@tampil');
+Route::get('/datasiswa', 'SiswaController@tampil')->name('siswa.data');
 Route::get('/siswa/{siswa}', 'SiswaController@detail');
+
 Route::get('/siswa/hapus/{id}', 'SiswaController@hapus');
+
+Route::get('/siswa/{siswa}/edit', 'SiswaController@edit');
+
+Route::patch('/siswa/{siswa}', 'SiswaController@prosesedit')->name('siswa.proses');
